@@ -202,11 +202,7 @@ class SeatType:
         print(f"S{seats.student}")
         print(f"P{seats.pensioner}\n")
 
-        # if self.type_of_ticket > 0:
-        #     self.decr_1['state'] = 'normal'
-        #     self.decr_2['state'] = 'normal'
-        #     self.decr_3['state'] = 'normal'
-        #     self.decr_4['state'] = 'normal'
+        seat_amt["text"] = f"Seats selected: {self.type_of_ticket}"
 
 
     def decrease(self, counter, id):
@@ -217,17 +213,20 @@ class SeatType:
             if id == "adult":
                 self.adults -= 1
                 counter['text'] = self.adults
+                self.type_of_ticket += 1
             elif id == "child":
                 self.child -= 1
                 counter['text'] = self.child
+                self.type_of_ticket += 1
             elif id == "student":
                 self.student -= 1
                 counter['text'] = self.student
+                self.type_of_ticket += 1
             elif id == "pensioner":
                 self.pensioner -= 1
                 counter['text'] = self.pensioner
+                self.type_of_ticket += 1
             
-            self.type_of_ticket += 1
 
             print(f"after decr\ntot{self.type_of_ticket}")
             print(f"A{seats.adults}")
@@ -235,15 +234,20 @@ class SeatType:
             print(f"S{seats.student}")
             print(f"P{seats.pensioner}\n")
 
-
+            # I THINK THIS NEEDS FIXING
+            # disable respective decrease button when it reaches 0
             if self.adults == 0:
+                print("its working")
                 self.decr_1['state'] = 'disabled'
             elif self.child == 0:
                 self.decr_2['state'] = 'disabled'
+                print("its working")
             elif self.student == 0:
                 self.decr_3['state'] = 'disabled'
+                print("its working")
             elif self.pensioner == 0:
                 self.decr_4['state'] = 'disabled'
+                print("its working")
 
             # undisable increase buttons if at least 1 seat available
             if self.type_of_ticket > 0:
@@ -251,6 +255,8 @@ class SeatType:
                 self.incr_2['state'] = 'normal'
                 self.incr_3['state'] = 'normal'
                 self.incr_4['state'] = 'normal'
+            
+            seat_amt["text"] = f"Seats selected: {self.type_of_ticket}"
 
 
     def __init__(self):
